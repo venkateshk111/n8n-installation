@@ -2,120 +2,46 @@
 
 A comprehensive guide for installing n8n workflow automation tool locally on Windows, macOS, and Linux.
 
-## 🚀 Quick Installation
-
-### Windows (PowerShell)
-
-```powershell
-# Download and run
-irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1 -OutFile install-n8n.ps1
-.\install-n8n.ps1
-```
-
-### Linux/macOS (Bash)
-
-```bash
-# Download and run
-curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh -o install-n8n.sh
-chmod +x install-n8n.sh
-./install-n8n.sh
-```
-
-## 📋 Table of Contents
+## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Installation Methods](#installation-methods)
-  - [Automated Scripts (Recommended)](#automated-scripts-recommended)
-  - [Manual Installation](#manual-installation)
-  - [Docker Installation](#docker-installation)
+  - [Windows](#windows)
+  - [macOS](#macos)
+  - [Linux](#linux)
+  - [Docker (All Platforms)](#docker-all-platforms)
 - [Quick Start](#quick-start)
 - [Configuration](#configuration)
 - [Troubleshooting](#troubleshooting)
-- [Updating n8n](#updating-n8n)
-- [Uninstalling n8n](#uninstalling-n8n)
 
-## ✅ Prerequisites
+## Prerequisites
 
 - **Node.js** version 18.10 or newer
 - **npm** (comes with Node.js)
 - At least 4GB RAM recommended
 - Modern web browser (Chrome, Firefox, Edge, Safari)
 
-## 📦 Installation Methods
+## Installation Methods
 
-### Automated Scripts (Recommended)
+### Windows
 
-The easiest way to install n8n is using our automated scripts:
+#### Method 1: Automated PowerShell Script (Recommended)
 
-#### Windows
-
-1. **Open PowerShell as Administrator**
-
-2. **Allow script execution** (one-time setup):
+1. Open PowerShell as Administrator
+2. Allow script execution (one-time setup):
    ```powershell
    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
    ```
-
-3. **Download and run the installation script**:
+3. Download and run the installation script:
    ```powershell
+   # Download the script
    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1" -OutFile "install-n8n.ps1"
+   
+   # Run the script
    .\install-n8n.ps1
    ```
 
-**What the script does:**
-- ✅ Checks for Node.js installation
-- ✅ Installs Node.js automatically using winget (if missing)
-- ✅ Validates Node.js version (18.10+)
-- ✅ Installs n8n globally via npm
-- ✅ Verifies installation
-- ✅ Offers to start n8n immediately
-
-#### macOS
-
-1. **Open Terminal**
-
-2. **Download and run the installation script**:
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh -o install-n8n.sh
-   chmod +x install-n8n.sh
-   ./install-n8n.sh
-   ```
-
-**What the script does:**
-- ✅ Detects your OS automatically
-- ✅ Checks for Node.js installation
-- ✅ Installs Node.js using Homebrew (if missing)
-- ✅ Validates Node.js version (18.10+)
-- ✅ Installs n8n globally via npm
-- ✅ Verifies installation
-- ✅ Offers to start n8n immediately
-
-#### Linux
-
-1. **Open Terminal**
-
-2. **Download and run the installation script**:
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh -o install-n8n.sh
-   chmod +x install-n8n.sh
-   ./install-n8n.sh
-   ```
-
-**What the script does:**
-- ✅ Auto-detects your Linux distribution
-- ✅ Checks for Node.js installation
-- ✅ Installs Node.js using your package manager:
-  - **Ubuntu/Debian**: apt-get
-  - **Fedora/RHEL/CentOS**: dnf
-  - **Arch Linux**: pacman
-- ✅ Validates Node.js version (18.10+)
-- ✅ Installs n8n globally via npm
-- ✅ Verifies installation
-- ✅ Offers to start n8n immediately
-
-### Manual Installation
-
-#### Windows
+#### Method 2: Manual Installation
 
 1. **Install Node.js**
    - Download from [nodejs.org](https://nodejs.org/)
@@ -136,9 +62,23 @@ The easiest way to install n8n is using our automated scripts:
    n8n
    ```
 
-#### macOS
+#### Method 3: Using winget
 
-**Using Homebrew:**
+```powershell
+# Install Node.js
+winget install OpenJS.NodeJS.LTS
+
+# Install n8n
+npm install n8n -g
+
+# Start n8n
+n8n
+```
+
+### macOS
+
+#### Method 1: Using Homebrew (Recommended)
+
 ```bash
 # Install Node.js
 brew install node
@@ -150,12 +90,24 @@ npm install n8n -g
 n8n
 ```
 
-**Quick Start with npx:**
+#### Method 2: Quick Start with npx
+
 ```bash
 npx n8n
 ```
 
-#### Linux
+#### Method 3: Automated Script
+
+```bash
+# Download and run installation script
+curl -O https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh
+chmod +x install-n8n.sh
+./install-n8n.sh
+```
+
+### Linux
+
+#### Method 1: Using Package Manager
 
 **Ubuntu/Debian:**
 ```bash
@@ -195,7 +147,13 @@ sudo npm install n8n -g
 n8n
 ```
 
-### Docker Installation
+#### Method 2: Quick Start with npx
+
+```bash
+npx n8n
+```
+
+### Docker (All Platforms)
 
 #### Basic Docker Run
 
@@ -224,7 +182,7 @@ services:
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=changeme
+      - N8N_BASIC_AUTH_PASSWORD=<your-password-here>
     volumes:
       - ~/.n8n:/home/node/.n8n
 ```
@@ -234,7 +192,7 @@ Run with:
 docker-compose up -d
 ```
 
-## 🎯 Quick Start
+## Quick Start
 
 1. **Start n8n**
    ```bash
@@ -252,7 +210,7 @@ docker-compose up -d
    - Click "Add workflow"
    - Start building automation by adding nodes
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -302,7 +260,7 @@ export DB_POSTGRESDB_USER=n8n_user
 export DB_POSTGRESDB_PASSWORD=your_password
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Port Already in Use
 
@@ -361,14 +319,7 @@ export NODE_OPTIONS="--max-old-space-size=4096"
 n8n
 ```
 
-### Script Execution Issues (Windows)
-
-If you get an error about script execution being disabled:
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
-
-## 🔄 Updating n8n
+## Updating n8n
 
 ```bash
 npm update n8n -g
@@ -379,7 +330,7 @@ Or for Docker:
 docker pull docker.n8n.io/n8nio/n8n
 ```
 
-## 🗑️ Uninstalling n8n
+## Uninstalling n8n
 
 ```bash
 npm uninstall n8n -g
@@ -389,36 +340,19 @@ To remove data folder:
 - **Windows**: Delete `C:\Users\YOUR_USERNAME\.n8n`
 - **macOS/Linux**: `rm -rf ~/.n8n`
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Official Documentation](https://docs.n8n.io/)
 - [Community Forum](https://community.n8n.io/)
 - [GitHub Repository](https://github.com/n8n-io/n8n)
 - [Workflow Templates](https://n8n.io/workflows/)
-- [YouTube Tutorials](https://www.youtube.com/c/n8n-io)
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Feel free to submit issues or pull requests to improve this installation guide.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
+## License
 
 This installation guide is provided as-is for the community. n8n itself is licensed under the [Sustainable Use License](https://github.com/n8n-io/n8n/blob/master/LICENSE.md).
 
-## ⭐ Support
-
-If you found this helpful, please give it a star! ⭐
-
-For issues or questions:
-- Open an issue in this repository
-- Visit the [n8n Community Forum](https://community.n8n.io/)
-
 ---
-
-**Made with ❤️ for the n8n community**
