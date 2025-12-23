@@ -640,5 +640,11 @@ If you found this helpful, please give it a star! ⭐
 
 ---
 
+<!--
 [![GitHub Stars](https://img.shields.io/github/stars/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
 [![GitHub Forks](https://img.shields.io/github/forks/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
+[![GitHub Watchers](https://img.shields.io/github/watchers/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
+[![GitHub Issues](https://img.shields.io/github/issues/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n/pulls)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
+-->
