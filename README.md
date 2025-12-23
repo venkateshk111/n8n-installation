@@ -1,13 +1,27 @@
+# 🌟 What is n8n?
+
+n8n is a fair-code licensed workflow automation tool. It allows you to connect apps and services together to automate tasks and workflows. With n8n, you can:
+
+- Automate repetitive tasks
+- Connect APIs and services
+- Build complex workflows with a visual interface
+- Self-host your automation platform
+- Extend functionality with custom nodes
+
 # n8n Local Installation Guide
 
-A comprehensive guide for installing n8n workflow automation tool locally on Windows, macOS, and Linux.
+A comprehensive guide for installing n8n workflow automation tool locally on Windows, macOS, and Linux with automated installation and uninstallation scripts.
 
 ## 🚀 Quick Installation
 
 ### Windows (PowerShell)
 
 ```powershell
-# Download and run
+irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1 | iex
+```
+
+Or download and run separately:
+```powershell
 irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1 -OutFile install-n8n.ps1
 .\install-n8n.ps1
 ```
@@ -15,10 +29,41 @@ irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/instal
 ### Linux/macOS (Bash)
 
 ```bash
-# Download and run
+curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh | bash
+```
+
+Or download and run separately:
+```bash
 curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.sh -o install-n8n.sh
 chmod +x install-n8n.sh
 ./install-n8n.sh
+```
+
+## 🗑️ Quick Uninstallation
+
+### Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.ps1 | iex
+```
+
+Or download and run separately:
+```powershell
+irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.ps1 -OutFile uninstall-n8n.ps1
+.\uninstall-n8n.ps1
+```
+
+### Linux/macOS (Bash)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.sh | bash
+```
+
+Or download and run separately:
+```bash
+curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.sh -o uninstall-n8n.sh
+chmod +x uninstall-n8n.sh
+./uninstall-n8n.sh
 ```
 
 ## 📋 Table of Contents
@@ -30,9 +75,12 @@ chmod +x install-n8n.sh
   - [Docker Installation](#docker-installation)
 - [Quick Start](#quick-start)
 - [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Updating n8n](#updating-n8n)
 - [Uninstalling n8n](#uninstalling-n8n)
+  - [Automated Uninstallation (Recommended)](#automated-uninstallation-recommended)
+  - [Manual Uninstallation](#manual-uninstallation)
+- [Updating n8n](#updating-n8n)
+- [Troubleshooting](#troubleshooting)
+- [Additional Resources](#additional-resources)
 
 ## ✅ Prerequisites
 
@@ -45,9 +93,9 @@ chmod +x install-n8n.sh
 
 ### Automated Scripts (Recommended)
 
-The easiest way to install n8n is using our automated scripts:
+The easiest way to install n8n is using our automated scripts. These scripts handle everything automatically:
 
-#### Windows
+#### Windows Installation
 
 1. **Open PowerShell as Administrator**
 
@@ -58,19 +106,25 @@ The easiest way to install n8n is using our automated scripts:
 
 3. **Download and run the installation script**:
    ```powershell
-   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1" -OutFile "install-n8n.ps1"
+   irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1 -OutFile install-n8n.ps1
    .\install-n8n.ps1
    ```
+   
+   Or run directly:
+   ```powershell
+   irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/install-n8n.ps1 | iex
+   ```
 
-**What the script does:**
-- ✅ Checks for Node.js installation
+**What the Windows script does:**
+- ✅ Checks for administrator privileges
+- ✅ Detects existing Node.js installation
 - ✅ Installs Node.js automatically using winget (if missing)
 - ✅ Validates Node.js version (18.10+)
 - ✅ Installs n8n globally via npm
-- ✅ Verifies installation
+- ✅ Verifies successful installation
 - ✅ Offers to start n8n immediately
 
-#### macOS
+#### macOS Installation
 
 1. **Open Terminal**
 
@@ -81,16 +135,17 @@ The easiest way to install n8n is using our automated scripts:
    ./install-n8n.sh
    ```
 
-**What the script does:**
-- ✅ Detects your OS automatically
-- ✅ Checks for Node.js installation
+**What the macOS script does:**
+- ✅ Detects macOS automatically
+- ✅ Checks for existing Node.js installation
 - ✅ Installs Node.js using Homebrew (if missing)
+- ✅ Installs Homebrew if not present
 - ✅ Validates Node.js version (18.10+)
 - ✅ Installs n8n globally via npm
-- ✅ Verifies installation
+- ✅ Verifies successful installation
 - ✅ Offers to start n8n immediately
 
-#### Linux
+#### Linux Installation
 
 1. **Open Terminal**
 
@@ -101,16 +156,17 @@ The easiest way to install n8n is using our automated scripts:
    ./install-n8n.sh
    ```
 
-**What the script does:**
+**What the Linux script does:**
 - ✅ Auto-detects your Linux distribution
-- ✅ Checks for Node.js installation
+- ✅ Checks for existing Node.js installation
 - ✅ Installs Node.js using your package manager:
   - **Ubuntu/Debian**: apt-get
   - **Fedora/RHEL/CentOS**: dnf
   - **Arch Linux**: pacman
 - ✅ Validates Node.js version (18.10+)
+- ✅ Handles sudo permissions automatically
 - ✅ Installs n8n globally via npm
-- ✅ Verifies installation
+- ✅ Verifies successful installation
 - ✅ Offers to start n8n immediately
 
 ### Manual Installation
@@ -302,6 +358,128 @@ export DB_POSTGRESDB_USER=n8n_user
 export DB_POSTGRESDB_PASSWORD=your_password
 ```
 
+## 🗑️ Uninstalling n8n
+
+### Automated Uninstallation (Recommended)
+
+We provide automated uninstallation scripts that safely remove n8n and optionally backup your data.
+
+#### Windows Uninstallation
+
+```powershell
+# Download and run
+irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.ps1 -OutFile uninstall-n8n.ps1
+.\uninstall-n8n.ps1
+```
+
+Or run directly:
+```powershell
+irm https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.ps1 | iex
+```
+
+**What the Windows uninstall script does:**
+- ✅ Checks if n8n is currently running
+- ✅ Offers to stop running n8n process
+- ✅ Uninstalls n8n package globally
+- ✅ **Creates automatic timestamped backup** of your data folder
+- ✅ Prompts for confirmation before removing data
+- ✅ Optional npm cache cleanup
+- ✅ Provides detailed uninstallation summary
+
+#### macOS Uninstallation
+
+```bash
+# Download and run
+curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.sh -o uninstall-n8n.sh
+chmod +x uninstall-n8n.sh
+./uninstall-n8n.sh
+```
+
+**What the macOS uninstall script does:**
+- ✅ Checks if n8n is currently running
+- ✅ Offers to stop running n8n process
+- ✅ Uninstalls n8n package globally
+- ✅ **Creates automatic timestamped backup** of your data folder
+- ✅ Prompts for confirmation before removing data
+- ✅ Optional npm cache cleanup
+- ✅ Provides detailed uninstallation summary
+
+#### Linux Uninstallation
+
+```bash
+# Download and run
+curl -fsSL https://raw.githubusercontent.com/venkateshk111/n8n-installation/main/uninstall-n8n.sh -o uninstall-n8n.sh
+chmod +x uninstall-n8n.sh
+./uninstall-n8n.sh
+```
+
+**What the Linux uninstall script does:**
+- ✅ Checks if n8n is currently running
+- ✅ Offers to stop running n8n process
+- ✅ Uninstalls n8n package globally
+- ✅ Handles sudo permissions automatically
+- ✅ **Creates automatic timestamped backup** of your data folder
+- ✅ Prompts for confirmation before removing data
+- ✅ Optional npm cache cleanup
+- ✅ Provides detailed uninstallation summary
+
+### Manual Uninstallation
+
+If you prefer to uninstall manually:
+
+**Stop n8n** (if running):
+- Press `Ctrl+C` in the terminal where n8n is running
+
+**Uninstall n8n package:**
+
+```bash
+# Windows, macOS, Linux
+npm uninstall n8n -g
+
+# Linux (if permission error)
+sudo npm uninstall n8n -g
+```
+
+**Remove data folder** (⚠️ WARNING: This deletes all workflows, credentials, and execution history!):
+
+```powershell
+# Windows PowerShell
+Remove-Item -Path "$env:USERPROFILE\.n8n" -Recurse -Force
+```
+
+```bash
+# macOS/Linux
+rm -rf ~/.n8n
+```
+
+**Optional - Clear npm cache:**
+
+```bash
+npm cache clean --force
+```
+
+> **Important**: The data folder contains all your workflows, credentials, and execution history. **Always backup** this folder before deletion if you want to preserve your work!
+
+## 🔄 Updating n8n
+
+### Using npm
+
+```bash
+npm update n8n -g
+```
+
+### Using Docker
+
+```bash
+docker pull docker.n8n.io/n8nio/n8n
+```
+
+### Check current version
+
+```bash
+n8n --version
+```
+
 ## 🔧 Troubleshooting
 
 ### Port Already in Use
@@ -368,26 +546,15 @@ If you get an error about script execution being disabled:
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 
-## 🔄 Updating n8n
+### n8n Command Not Found After Installation
 
-```bash
-npm update n8n -g
-```
+**Windows:**
+1. Close and reopen PowerShell
+2. Or restart your computer to refresh environment variables
 
-Or for Docker:
-```bash
-docker pull docker.n8n.io/n8nio/n8n
-```
-
-## 🗑️ Uninstalling n8n
-
-```bash
-npm uninstall n8n -g
-```
-
-To remove data folder:
-- **Windows**: Delete `C:\Users\YOUR_USERNAME\.n8n`
-- **macOS/Linux**: `rm -rf ~/.n8n`
+**macOS/Linux:**
+1. Close and reopen Terminal
+2. Or reload your shell: `source ~/.bashrc` or `source ~/.zshrc`
 
 ## 📚 Additional Resources
 
@@ -396,29 +563,82 @@ To remove data folder:
 - [GitHub Repository](https://github.com/n8n-io/n8n)
 - [Workflow Templates](https://n8n.io/workflows/)
 - [YouTube Tutorials](https://www.youtube.com/c/n8n-io)
+- [n8n Blog](https://blog.n8n.io/)
+
+## 📁 Repository Structure
+
+```
+n8n-installation/
+├── README.md              # This file - Complete installation guide
+├── install-n8n.ps1        # Windows PowerShell installation script
+├── install-n8n.sh         # Linux/macOS Bash installation script
+├── uninstall-n8n.ps1      # Windows PowerShell uninstallation script
+├── uninstall-n8n.sh       # Linux/macOS Bash uninstallation script
+└── LICENSE                # License information
+```
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Here's how you can help:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Test your changes on the target platform
+4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
+
+### Contribution Ideas
+
+- Test scripts on different OS versions
+- Add support for more Linux distributions
+- Improve error handling
+- Add more configuration examples
+- Translate documentation
+- Report bugs or issues
 
 ## 📝 License
 
-This installation guide is provided as-is for the community. n8n itself is licensed under the [Sustainable Use License](https://github.com/n8n-io/n8n/blob/master/LICENSE.md).
+This installation guide and scripts are provided as-is for the community. n8n itself is licensed under the [Sustainable Use License](https://github.com/n8n-io/n8n/blob/master/LICENSE.md).
 
 ## ⭐ Support
 
 If you found this helpful, please give it a star! ⭐
 
-For issues or questions:
-- Open an issue in this repository
-- Visit the [n8n Community Forum](https://community.n8n.io/)
+### Need Help?
+
+- 🐛 **Found a bug?** Open an issue in this repository
+- 💬 **Have questions?** Visit the [n8n Community Forum](https://community.n8n.io/)
+- 📧 **Script issues?** Open an issue with details about your OS and error message
+
+## 🎯 Features
+
+### Installation Scripts
+- ✅ Automatic Node.js detection and installation
+- ✅ Version validation (Node.js 18.10+)
+- ✅ Cross-platform support (Windows, macOS, Linux)
+- ✅ Color-coded output for better readability
+- ✅ Error handling with helpful messages
+- ✅ Post-installation verification
+- ✅ Option to start n8n immediately
+
+### Uninstallation Scripts
+- ✅ Automatic backup creation before data deletion
+- ✅ Running process detection and termination
+- ✅ Confirmation prompts for safety
+- ✅ Optional npm cache cleanup
+- ✅ Detailed summary of removed items
+- ✅ Data preservation options
+
+## 🔐 Security Notes
+
+- Never run scripts from untrusted sources
+- Review scripts before execution (they're open source!)
+- Keep your Node.js and n8n updated
+- Use strong passwords for n8n authentication
+- Don't expose n8n directly to the internet without proper security
 
 ---
 
-**Made with ❤️ for the n8n community**
+[![GitHub Stars](https://img.shields.io/github/stars/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
+[![GitHub Forks](https://img.shields.io/github/forks/n8n-io/n8n?style=social)](https://github.com/n8n-io/n8n)
