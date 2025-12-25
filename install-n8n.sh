@@ -129,7 +129,8 @@ fi
 
 echo ""
 echo -e "${YELLOW}Installing n8n globally...${NC}"
-echo -e "${CYAN}This may take a few minutes...${NC}"
+echo -e "${CYAN}This may take a few minutes. You'll see the installation progress below:${NC}"
+echo ""
 
 # Install n8n
 if [[ "$EUID" -eq 0 ]]; then
@@ -138,16 +139,20 @@ if [[ "$EUID" -eq 0 ]]; then
 else
     # Not running as root, check if sudo is needed
     if npm install n8n -g 2>/dev/null; then
+        echo ""
         echo -e "${GREEN}✓ n8n installed successfully!${NC}"
     else
         echo -e "${YELLOW}Installing with sudo...${NC}"
+        echo ""
         sudo npm install n8n -g --unsafe-perm
     fi
 fi
 
 if [ $? -eq 0 ]; then
+    echo ""
     echo -e "${GREEN}✓ n8n installed successfully!${NC}"
 else
+    echo ""
     echo -e "${RED}✗ Failed to install n8n${NC}"
     echo ""
     echo -e "${YELLOW}Try running manually:${NC}"

@@ -88,16 +88,19 @@ if (Test-Command npm) {
 
 Write-Host ""
 Write-Host "Installing n8n globally..." -ForegroundColor Yellow
-Write-Host "This may take a few minutes..." -ForegroundColor Cyan
+Write-Host "This may take a few minutes. You'll see the installation progress below:" -ForegroundColor Cyan
+Write-Host ""
 
 try {
-    npm install n8n -g 2>&1 | Out-Null
+    npm install n8n -g
     if ($LASTEXITCODE -eq 0) {
+        Write-Host ""
         Write-Host "✓ n8n installed successfully!" -ForegroundColor Green
     } else {
         throw "npm installation failed"
     }
 } catch {
+    Write-Host ""
     Write-Host "✗ Failed to install n8n" -ForegroundColor Red
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
     Write-Host ""
